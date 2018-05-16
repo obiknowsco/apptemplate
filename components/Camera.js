@@ -33,7 +33,6 @@ export default class CameraComponent extends React.Component {
     // if user said yes, set the state
     this.setState({hasCameraPermissions: status === 'granted'})
 
-
   }
   
 
@@ -53,20 +52,6 @@ export default class CameraComponent extends React.Component {
     }
   };
 
-  _handleBarCodeRead = result => {
-    if (result.data !== this.state.lastScannedUrl) {
-      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
-        [
-          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      );
-      LayoutAnimation.spring();
-      this.setState({ lastScannedUrl: result.data });
-    }
-  };
 
   render() {
 
@@ -123,6 +108,21 @@ export default class CameraComponent extends React.Component {
     }
 
   }
+
+  _handleBarCodeRead = result => {
+    if (result.data !== this.state.lastScannedUrl) {
+      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
+        [
+          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      );
+      LayoutAnimation.spring();
+      this.setState({ lastScannedUrl: result.data });
+    }
+  };
 
   _handlePressUrl = () => {
       Alert.alert(
