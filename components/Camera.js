@@ -55,7 +55,7 @@ export default class CameraComponent extends React.Component {
 
   _handleBarCodeRead = result => {
     if (result.data !== this.state.lastScannedUrl) {
-      Alert.alert('I cans Read!',result.data,
+      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
         [
           {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
           {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
