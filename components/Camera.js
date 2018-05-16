@@ -35,7 +35,7 @@ export default class CameraComponent extends React.Component {
     } else {
       // return the Camera
       return <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={whichCamera}>
+          <Camera style={{ flex: 1, justifyContent:'space-between' }} type={whichCamera}>
             <Header searchBar rounded style={{ position: "absolute", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
               <View style={{ flexDirection: "row", flex: 4 }}>
                 <Item style={{ backgroundColor: "transparent" }}>
@@ -59,6 +59,11 @@ export default class CameraComponent extends React.Component {
                 </Item>
               </View>
             </Header>
+
+            <View style={{flexDirection:'row', justifyContent:'space-between', paddingHorizontal:10, marginBottom: 15}}>
+              <Octicons name="beaker" style={{color:'white', fontSize:36}} />
+              <Octicons name="broadcast" style={{color:'white', fontSize:36}} />
+            </View>
           </Camera>
         </View>;
     }

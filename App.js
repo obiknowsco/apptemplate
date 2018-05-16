@@ -47,7 +47,7 @@ export default class App extends React.Component {
         <Content>
           <Swiper 
             loop={false}
-            // showsPagination={false}
+            showsPagination={false}
             index={1}
           >
             
