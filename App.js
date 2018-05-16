@@ -4,6 +4,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { Container, Content } from "native-base";
 import  Swiper  from "react-native-swiper";
 
+// components
+import Camera from './components/Camera'
+
 const styles = StyleSheet.create({
   slideDefault: {
     flex:1,
@@ -62,8 +65,8 @@ export default class App extends React.Component {
                 <Text style={styles.text}>Profile & Settings</Text>
               </View>
 
-              <View style={styles.slideDefault}>
-                <Text style={styles.text}>Camera</Text>
+              <View style={{ flex: 1 }}>
+                  <Camera />
               </View>
 
               <View style={styles.slideDefault}>
