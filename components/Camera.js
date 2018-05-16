@@ -61,12 +61,12 @@ export default class CameraComponent extends React.Component {
             </Header>
 
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
-              <Octicons name="beaker" style={{ color: "white", fontSize: 36 }} />
+              <Octicons name="beaker" style={{ color: "white", fontSize: 28 }} />
               <View style={{ alignItems: "center" }}>
                 <Octicons name="screen-full" style={{ color: "white", fontSize: 88 }} />
-                <Octicons name="file-media" style={{ color: "white", fontSize: 36 }} />
+                <Octicons name="file-media" style={{ color: "white", fontSize: 28 }} />
               </View>
-              <Octicons name="broadcast" style={{ color: "white", fontSize: 36 }} />
+              <Octicons name="broadcast" style={{ color: "white", fontSize: 28 }} />
             </View>
           </Camera>
         </View>;
