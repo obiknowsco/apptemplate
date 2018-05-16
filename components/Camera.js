@@ -35,7 +35,7 @@ export default class CameraComponent extends React.Component {
     } else {
       // return the Camera
       return <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1, justifyContent:'space-between' }} type={whichCamera}>
+          <Camera style={{ flex: 1, justifyContent: "space-between" }} type={whichCamera}>
             <Header searchBar rounded style={{ position: "absolute", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
               <View style={{ flexDirection: "row", flex: 4 }}>
                 <Item style={{ backgroundColor: "transparent" }}>
@@ -46,7 +46,7 @@ export default class CameraComponent extends React.Component {
               </View>
               <View style={{ flexDirection: "row", flex: 2, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
-                  <Octicons name="screen-full" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
+                  <Octicons name="diff-modified" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
                   <Octicons name="device-camera-video" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
                       this.setState({
                         whichCamera:
@@ -60,9 +60,13 @@ export default class CameraComponent extends React.Component {
               </View>
             </Header>
 
-            <View style={{flexDirection:'row', justifyContent:'space-between', paddingHorizontal:10, marginBottom: 15}}>
-              <Octicons name="beaker" style={{color:'white', fontSize:36}} />
-              <Octicons name="broadcast" style={{color:'white', fontSize:36}} />
+            <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
+              <Octicons name="beaker" style={{ color: "white", fontSize: 36 }} />
+              <View style={{ alignItems: "center" }}>
+                <Octicons name="screen-full" style={{ color: "white", fontSize: 88 }} />
+                <Octicons name="file-media" style={{ color: "white", fontSize: 36 }} />
+              </View>
+              <Octicons name="broadcast" style={{ color: "white", fontSize: 36 }} />
             </View>
           </Camera>
         </View>;
