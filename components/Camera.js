@@ -10,12 +10,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { Camera, BarCodeScanner, Permissions } from 'expo';
+import { SQLite, Camera, BarCodeScanner, Permissions } from 'expo';
 
 import { Container, Content, Header, Item, Input, Button } from "native-base";
 import { Octicons } from "@expo/vector-icons";
 
+// UI Components
+import Card from "react-native-modal";
 
+
+// Database
 
 export default class CameraComponent extends React.Component {
 
@@ -25,6 +29,7 @@ export default class CameraComponent extends React.Component {
     whichCamera: Camera.Constants.Type.back,
     photosTaken: 0,
     lastScannedUrl: null,
+    isCardVisible: false,
   }
 
   async componentWillMount(){
@@ -36,7 +41,25 @@ export default class CameraComponent extends React.Component {
   }
   
 
-  // functions
+  // filesystem funcs
+  handleBarCodeRead = result => {
+    if (result.data !== this.state.lastScannedUrl) {
+      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
+        [
+          {text: 'Save', onPress: () => 
+            console.log('Save the code to the database')
+
+          },
+          {text: 'Search', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'Clear', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      );
+      LayoutAnimation.spring();
+      this.setState({ lastScannedUrl: result.data });
+    }
+  };
+
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
@@ -52,6 +75,11 @@ export default class CameraComponent extends React.Component {
     }
   };
 
+  _toggleCard = () => {
+    this.setState({ isCardVisible: !this.state.isCardVisible });
+  }
+
+  
 
   render() {
 
@@ -66,63 +94,71 @@ export default class CameraComponent extends React.Component {
     } else {
       // return the Camera
       return <View style={{ flex: 1 }}>
-
-            <BarCodeScanner onBarCodeRead={this._handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
-              <Header searchBar rounded style={{ position: "absolute", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
-                <View style={{ flexDirection: "row", flex: 4 }}>
-                  <Item style={{ backgroundColor: "transparent" }}>
-                    <Octicons name="bug" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
-                    <Octicons name="search" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
-                    <Input placeholder="research" placeholderTextColor="white" />
-                  </Item>
-                </View>
-                <View style={{ flexDirection: "row", flex: 2, justifyContent: "space-around" }}>
-                  <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
-                    <Octicons name="diff-modified" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
-                    <Octicons name="device-camera-video" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
-                        this.setState({
-                          whichCamera:
-                            this.state.whichCamera ===
-                            Camera.Constants.Type.back
-                              ? Camera.Constants.Type.front
-                              : Camera.Constants.Type.back
-                        });
-                      }} />
-                  </Item>
-                </View>
-              </Header>
-
-              <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
-                <Octicons name="beaker" style={{ color: "white", fontSize: 28 }} />
-                <View style={{ alignItems: "center" }}>
-                  <Octicons name="screen-full" style={{ color: "white", fontSize: 88 }} onPress={() => {
-                      this.takePicture();
-                    }} />
-                  <Octicons name="file-media" style={{ color: "white", fontSize: 28 }} />
-                </View>
-                <Octicons name="broadcast" style={{ color: "white", fontSize: 28 }} />
+          <BarCodeScanner onBarCodeRead={this.handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
+            <Header searchBar rounded style={{ position: "absolute", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
+              <View style={{ flexDirection: "row", flex: 4 }}>
+                <Item style={{ backgroundColor: "transparent" }}>
+                  <Octicons name="bug" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
+                  <Octicons name="search" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
+                  <Input placeholder="research" placeholderTextColor="white" />
+                </Item>
               </View>
-            </BarCodeScanner>
+              <View style={{ flexDirection: "row", flex: 2, justifyContent: "space-around" }}>
+                <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
+                  <Octicons name="diff-modified" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
+                  <Octicons name="device-camera-video" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
+                      this.setState({
+                        whichCamera:
+                          this.state.whichCamera ===
+                          Camera.Constants.Type.back
+                            ? Camera.Constants.Type.front
+                            : Camera.Constants.Type.back
+                      });
+                    }} />
+                </Item>
+              </View>
+            </Header>
 
+            <View>
+              <Card 
+                isVisible={this.state.isCardVisible}
+                onSwipe={() => this.setState({ isCardVisible: false })}
+                swipeDirection="down"
+                animationIn="slideInUp"
+                animationOut="slideOutRight"
+                style={{flex:1/2, justifyContent:'flex-end',}}
+              >
+                <View style={{ flex: 1, backgroundColor:'white' }}>
+                  <Text>Hello!</Text>
+                  <Button onPress={this._toggleCard}>
+                    <Text>Hide me!</Text>
+                  </Button>
+                </View>
+              </Card>
+            </View>
+
+            <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
+              <Octicons name="beaker" style={{ color: "white", fontSize: 28 }} />
+              <View style={{ alignItems: "center" }}>
+                <Octicons 
+                name="screen-full" 
+                style={{ color: "white", fontSize: 88 }} 
+                onPress={() => {
+                    this._toggleCard();
+                    // this.takePicture();
+                  }} />
+              </View>
+              <Octicons name="broadcast" style={{ color: "white", fontSize: 28 }} />
+            </View>
+          </BarCodeScanner>
         </View>;
     }
 
   }
 
-  _handleBarCodeRead = result => {
-    if (result.data !== this.state.lastScannedUrl) {
-      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
-        [
-          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      );
-      LayoutAnimation.spring();
-      this.setState({ lastScannedUrl: result.data });
-    }
-  };
+  // UX functions
+
+
 
   _handlePressUrl = () => {
       Alert.alert(
