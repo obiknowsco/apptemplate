@@ -16,7 +16,7 @@ import { Container, Content, Header, Item, Input, Button } from "native-base";
 import { Octicons } from "@expo/vector-icons";
 
 // UI Components
-import Card from "react-native-modal";
+import Modal from "react-native-modal";
 
 
 // Database
@@ -29,7 +29,8 @@ export default class CameraComponent extends React.Component {
     whichCamera: Camera.Constants.Type.back,
     photosTaken: 0,
     lastScannedUrl: null,
-    isCardVisible: false,
+    isModalVisible: false,
+    isCameraModalVisible: false,
   }
 
   async componentWillMount(){
@@ -44,18 +45,24 @@ export default class CameraComponent extends React.Component {
   // filesystem funcs
   handleBarCodeRead = result => {
     if (result.data !== this.state.lastScannedUrl) {
-      Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
-        [
-          {text: 'Save', onPress: () => 
-            console.log('Save the code to the database')
+      // Alert.alert('I cans Read!',`Data:${result.data} Type:${result.type}`,
+      //   [
+      //     {text: 'Save', onPress: () => 
+      //       console.log('Save the code to the database')
 
-          },
-          {text: 'Search', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-          {text: 'Clear', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      );
-      LayoutAnimation.spring();
+      //     },
+      //     {text: 'Search', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      //     {text: 'Clear', onPress: () => console.log('OK Pressed')},
+      //   ],
+      //   { cancelable: false }
+      // );
+
+      // Open the Bar Code Modal
+      this._toggleBarCodeModal(result)
+
+
+
+      // LayoutAnimation.spring();
       this.setState({ lastScannedUrl: result.data });
     }
   };
@@ -75,8 +82,17 @@ export default class CameraComponent extends React.Component {
     }
   };
 
-  _toggleCard = () => {
-    this.setState({ isCardVisible: !this.state.isCardVisible });
+  _toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  }
+
+  _toggleBarCodeModal = (result) => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+
+    
+  }
+  _toggleCameraModal = () => {
+    this.setState({ isCameraModalVisible: !this.state.isCameraModalVisible });
   }
 
   
@@ -95,17 +111,20 @@ export default class CameraComponent extends React.Component {
       // return the Camera
       return <View style={{ flex: 1 }}>
           <BarCodeScanner onBarCodeRead={this.handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
-            <Header searchBar rounded style={{ position: "absolute", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
-              <View style={{ flexDirection: "row", flex: 4 }}>
+            <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
+              <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent" }}>
-                  <Octicons name="bug" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
-                  <Octicons name="search" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
-                  <Input placeholder="research" placeholderTextColor="white" />
+                  <Octicons name="beaker" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
                 </Item>
               </View>
-              <View style={{ flexDirection: "row", flex: 2, justifyContent: "space-around" }}>
+              <View style={{ flexDirection: "row", flex: 6 }}>
+                <Item style={{ justifyContent: "space-around" }}>
+                  <Octicons name="search" style={{ color: "white", fontSize: 24, fontWeight: "bold", padding: 5 }} />
+                  <Input placeholder="Find A Fact" placeholderTextColor="white" />
+                </Item>
+              </View>
+              <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
-                  <Octicons name="diff-modified" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
                   <Octicons name="device-camera-video" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
                       this.setState({
                         whichCamera:
@@ -118,33 +137,41 @@ export default class CameraComponent extends React.Component {
                 </Item>
               </View>
             </Header>
-
+            {/* Bar Code Scanning Modal */}
             <View>
-              <Card 
-                isVisible={this.state.isCardVisible}
-                onSwipe={() => this.setState({ isCardVisible: false })}
-                swipeDirection="down"
-                animationIn="slideInUp"
-                animationOut="slideOutRight"
-                style={{flex:1/2, justifyContent:'flex-end',}}
-              >
-                <View style={{ flex: 1, backgroundColor:'white' }}>
+              <Modal isVisible={this.state.isModalVisible} onSwipe={() => this.setState(
+                    { isModalVisible: false }
+                  )} swipeDirection="up" animationIn="slideInUp" animationOut="slideOutDown" hideModalContentWhileAnimating={false} onBackdropPress={this._toggleModal} style={{ flex: 1 / 2, justifyContent: "flex-end", bottom: 0 }}>
+                <View style={{ flex: 1, backgroundColor: "white" }}>
                   <Text>Hello!</Text>
-                  <Button onPress={this._toggleCard}>
+                  <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={this._toggleModal}>
                     <Text>Hide me!</Text>
                   </Button>
                 </View>
-              </Card>
+              </Modal>
+            </View>
+            {/* Camera/Crop OCR Reading Modal */}
+            <View>
+              <Modal isVisible={this.state.isCameraModalVisible} onSwipe={() => this.setState(
+                    { isCameraModalVisible: false }
+                  )} swipeDirection="up" animationIn="slideInUp" animationOut="slideOutDown" hideModalContentWhileAnimating={false} onBackdropPress={this._toggleModal} style={{ flex: 1 / 2, justifyContent: "flex-end", height:300 }}>
+                <View style={{ flex: 1, backgroundColor: "white" }}>
+                  <Text>
+                    Theres gonna be an img above me. I'll say: Scanning
+                    Photo{" "}
+                  </Text>
+                  <Button style={{ justifyContent: "center", alignItems: "center" }} onPress={this._toggleCameraModal}>
+                    <Text>Hide me!</Text>
+                  </Button>
+                </View>
+              </Modal>
             </View>
 
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
-              <Octicons name="beaker" style={{ color: "white", fontSize: 28 }} />
+              <Octicons name="book" style={{ color: "white", fontSize: 28 }} />
               <View style={{ alignItems: "center" }}>
-                <Octicons 
-                name="screen-full" 
-                style={{ color: "white", fontSize: 88 }} 
-                onPress={() => {
-                    this._toggleCard();
+                <Octicons name="screen-full" style={{ color: "white", fontSize: 88 }} onPress={() => {
+                    this._toggleCameraModal();
                     // this.takePicture();
                   }} />
               </View>

@@ -43,33 +43,20 @@ export default class App extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
+    return <Container>
         <Content>
-          <Swiper 
-            loop={false}
-            showsPagination={false}
-            index={1}>
+          <Swiper loop={false} showsPagination={false} index={1}>
             <View style={styles.slideDefault}>
               <Text style={styles.text}>History & Chat</Text>
             </View>
 
-            <Swiper
-              loop={false}
-              horizontal={false}
-              showsPagination={false}
-              index={1}
-              onIndexChanged={(index) => this.verticalScroll(index)}>
+            <Swiper loop={false} horizontal={false} showsPagination={false} index={1} onIndexChanged={index => this.verticalScroll(index)}>
               <View style={styles.slideDefault}>
                 <Text style={styles.text}>Profile & Settings</Text>
               </View>
 
               <View style={{ flex: 1 }}>
-                  <Camera />
-              </View>
-
-              <View style={styles.slideDefault}>
-                <Text style={styles.text}>Retrieved Result</Text>
+                <Camera />
               </View>
             </Swiper>
 
@@ -79,8 +66,7 @@ export default class App extends React.Component {
             </View>
           </Swiper>
         </Content>
-      </Container>
-    )
+      </Container>;
   }
 }
 
