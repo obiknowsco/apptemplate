@@ -152,9 +152,18 @@ export default class CameraComponent extends React.Component {
             </View>
             {/* Camera/Crop OCR Reading Modal */}
             <View>
-              <Modal isVisible={this.state.isCameraModalVisible} onSwipe={() => this.setState(
-                    { isCameraModalVisible: false }
-                  )} swipeDirection="up" animationIn="slideInUp" animationOut="slideOutDown" hideModalContentWhileAnimating={false} onBackdropPress={this._toggleModal} style={{ flex: 1 / 2, justifyContent: "flex-end", height:300 }}>
+              <Modal 
+                isVisible={this.state.isCameraModalVisible} 
+                onSwipe={() => this.setState(
+                  { isCameraModalVisible: false }
+                )}
+                swipeDirection="up"
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                hideModalContentWhileAnimating={false}
+                onBackdropPress={this._toggleModal}
+                style={{ flex: 1 / 2, justifyContent: "flex-end", height:300 }}
+              >
                 <View style={{ flex: 1, backgroundColor: "white" }}>
                   <Text>
                     Theres gonna be an img above me. I'll say: Scanning
