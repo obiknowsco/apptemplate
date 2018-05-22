@@ -47,7 +47,8 @@ export default class App extends React.Component {
         <Content>
           <Swiper loop={false} showsPagination={false} index={1}>
             <View style={styles.slideDefault}>
-              <Text style={styles.text}>History & Chat</Text>
+              <Text style={styles.text}>History & Past Searches
+              </Text>
             </View>
 
             <Swiper loop={false} horizontal={false} showsPagination={false} index={1} onIndexChanged={index => this.verticalScroll(index)}>
@@ -56,7 +57,10 @@ export default class App extends React.Component {
               </View>
 
               <View style={{ flex: 1 }}>
-                <Camera />
+                <Camera>
+                  {/* Red Target HUD  */}
+                  <View style={{ opacity: 0.3, backgroundColor: "red", height: 75, width: 150, justifyContent: "center", alignItems: "center" }} />
+                </Camera>
               </View>
             </Swiper>
 
