@@ -27,8 +27,7 @@ export default class PastScans extends Component {
           </Body>
         </Header>
         <Content>
-          <Text>This is Content Section</Text>
-
+          {/* Last Searched Card */}
           <Card>
             <CardItem>
               <Left>
@@ -60,6 +59,48 @@ export default class PastScans extends Component {
               </Right>
             </CardItem>
           </Card>
+
+          {/* 5-all, Past Searches */}
+          <Card>
+            <CardItem header>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>//Your text here</Text>
+              </Body>
+            </CardItem>
+            <CardItem footer>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+          </Card>
+          <Card>
+            <CardItem header>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>//Your text here</Text>
+              </Body>
+            </CardItem>
+            <CardItem footer>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+          </Card>
+          <Card>
+            <CardItem header>
+              <Text>NativeBase</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>//Your text here</Text>
+              </Body>
+            </CardItem>
+            <CardItem footer>
+              <Text>GeekyAnts</Text>
+            </CardItem>
+          </Card>
+
         </Content>
         <Footer>
           <FooterTab>
