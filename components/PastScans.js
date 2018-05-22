@@ -18,14 +18,21 @@ import {
   Text
 } from "native-base";
 
+// Icons
+import { Octicons } from "@expo/vector-icons";
+
 export default class PastScans extends Component {
   render() {
     return <Container>
         <Header>
           <Body>
-            <Title>Past Scans</Title>
+            <Title style={{}}>
+              Past Scans
+              <Octicons name="screen-normal" style={{ color: "black", fontSize: 22, fontWeight: "bold", marginLeft: 10 }} />
+            </Title>
           </Body>
         </Header>
+
         <Content>
           {/* Last Searched Card */}
           <Card>
@@ -33,8 +40,8 @@ export default class PastScans extends Component {
               <Left>
                 <Thumbnail source={{ uri: "https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&h=350" }} />
                 <Body>
-                  <Text>NativeBase</Text>
-                  <Text note>GeekyAnts</Text>
+                  <Text>Product Name</Text>
+                  <Text note>UPC:</Text>
                 </Body>
               </Left>
             </CardItem>
@@ -100,7 +107,6 @@ export default class PastScans extends Component {
               <Text>GeekyAnts</Text>
             </CardItem>
           </Card>
-
         </Content>
         <Footer>
           <FooterTab>

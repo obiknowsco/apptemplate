@@ -36,7 +36,7 @@ export default class App extends React.Component {
   }
 
   verticalScroll = (index) => {
-    if(index !== 1){
+    if(index != 1){
       this.setState({outerScrollEnabled:false})
     } else {
       this.setState({outerScrollEnabled:true})
@@ -47,7 +47,7 @@ export default class App extends React.Component {
     return <Container>
         <Content>
           <Swiper loop={false} showsPagination={false} index={1}>
-            <View style={{ flex:1 }}>
+            <View style={{ flex: 1 }}>
               <PastScans />
             </View>
 
