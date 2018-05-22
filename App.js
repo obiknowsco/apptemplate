@@ -65,7 +65,7 @@ export default class App extends React.Component {
             </Swiper>
 
             <View style={styles.slideDefault}>
-              <Text style={styles.text}>Stories & Trends</Text>
+              <Text style={styles.text}>Stories & Nearby</Text>
               <Text style={styles.subtext}>Kobo Earned</Text>
             </View>
           </Swiper>
