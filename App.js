@@ -6,6 +6,7 @@ import  Swiper  from "react-native-swiper";
 
 // components
 import Camera from './components/Camera'
+import PastScans from './components/PastScans'
 
 const styles = StyleSheet.create({
   slideDefault: {
@@ -46,9 +47,8 @@ export default class App extends React.Component {
     return <Container>
         <Content>
           <Swiper loop={false} showsPagination={false} index={1}>
-            <View style={styles.slideDefault}>
-              <Text style={styles.text}>History & Past Searches
-              </Text>
+            <View style={{ flex:1 }}>
+              <PastScans />
             </View>
 
             <Swiper loop={false} horizontal={false} showsPagination={false} index={1} onIndexChanged={index => this.verticalScroll(index)}>
