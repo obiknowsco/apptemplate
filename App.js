@@ -7,6 +7,8 @@ import  Swiper  from "react-native-swiper";
 // components
 import Camera from './screens/Camera'
 import FactRecords from './screens/FactRecords'
+import Trending from './screens/Trending'
+import Profile from './screens/Profile'
 
 const styles = StyleSheet.create({
   slideDefault: {
@@ -52,8 +54,9 @@ export default class App extends React.Component {
             </View>
 
             <Swiper loop={false} horizontal={false} showsPagination={false} index={1} onIndexChanged={index => this.verticalScroll(index)}>
-              <View style={styles.slideDefault}>
-                <Text style={styles.text}>Profile & Settings</Text>
+              <View style={{ flex: 1 }}>
+                <Profile/>
+                {/* <Text style={styles.text}>Profile & Settings</Text> */}
               </View>
 
               <View style={{ flex: 1 }}>
@@ -64,9 +67,10 @@ export default class App extends React.Component {
               </View>
             </Swiper>
 
-            <View style={styles.slideDefault}>
-              <Text style={styles.text}>Trending & Nearby</Text>
-              <Text style={styles.subtext}>Kobo Earned</Text>
+            <View style={{ flex: 1 }}>
+              <Trending />
+              {/* <Text style={styles.text}>Trending & Nearby</Text>
+              <Text style={styles.subtext}>Kobo Earned</Text> */}
             </View>
           </Swiper>
         </Content>
