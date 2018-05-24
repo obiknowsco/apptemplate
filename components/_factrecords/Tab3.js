@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Image } from 'react-native';
+import { Image } from "react-native";
 import {
   Container,
-  Header,
-  Title,
   Content,
   Footer,
   FooterTab,
@@ -18,27 +16,27 @@ import {
   Text
 } from "native-base";
 
+
+
 // Icons
 import { Octicons } from "@expo/vector-icons";
 
-export default class PastScans extends Component {
+export default class FactRecords_Tab3 extends Component {
   render() {
-    return <Container>
-        <Header>
-          <Body>
-            <Title style={{}}>
-              Past Scans
-              <Octicons name="screen-normal" style={{ color: "black", fontSize: 22, fontWeight: "bold", marginLeft: 10 }} />
-            </Title>
-          </Body>
-        </Header>
+    return (
+      <Container>
 
         <Content>
           {/* Last Searched Card */}
           <Card>
             <CardItem>
               <Left>
-                <Thumbnail source={{ uri: "https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&h=350" }} />
+                <Thumbnail
+                  source={{
+                    uri:
+                      "https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&h=350"
+                  }}
+                />
                 <Body>
                   <Text>Product Name</Text>
                   <Text note>UPC:</Text>
@@ -46,7 +44,13 @@ export default class PastScans extends Component {
               </Left>
             </CardItem>
             <CardItem cardBody>
-              <Image source={{ uri: "https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&h=350" }} style={{ height: 200, width: null, flex: 1 }} />
+              <Image
+                source={{
+                  uri:
+                    "https://images.pexels.com/photos/753267/pexels-photo-753267.jpeg?auto=compress&cs=tinysrgb&h=350"
+                }}
+                style={{ height: 200, width: null, flex: 1 }}
+              />
             </CardItem>
             <CardItem>
               <Left>
@@ -108,13 +112,16 @@ export default class PastScans extends Component {
             </CardItem>
           </Card>
         </Content>
-        <Footer>
+
+        {/* <Footer>
           <FooterTab>
             <Button full>
               <Text>Footer</Text>
             </Button>
           </FooterTab>
-        </Footer>
-      </Container>;
+        </Footer> */}
+
+      </Container>
+    );
   }
 }
