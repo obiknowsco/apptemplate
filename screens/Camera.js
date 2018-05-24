@@ -3,7 +3,7 @@ import {
   FileSystem, 
   View, Text, StyleSheet,
   LayoutAnimation,
-  Alert,
+  Alert, Image,
   Linking,
   Dimensions,
   StatusBar,
@@ -115,24 +115,25 @@ export default class CameraComponent extends React.Component {
       return ( <Text> No access to Camera</Text> )
     } else {
       // return the Camera
-      return <View style={{ flex: 1, backgroundColor:'transparent' }}>
+      return <View style={{ flex: 1, backgroundColor: "transparent" }}>
           <Camera onBarCodeRead={this.handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
             {/* Header */}
             <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent" }}>
-                  <Octicons name="beaker" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
+                  <Image source={require("../assets/barcode-icon.png")} fadeDuration={0} style={{ width: 28, height: 28 }} />
+                  {/* <Octicons name="beaker" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} /> */}
                 </Item>
               </View>
-              <View style={{ flexDirection: "row", flex: 6,  }}>
+              <View style={{ flexDirection: "row", flex: 6 }}>
                 <Item style={{ justifyContent: "space-around", backgroundColor: "#708090" }}>
                   <Octicons name="search" style={{ color: "white", fontSize: 18, padding: 8, fontWeight: "bold" }} />
-                  <Input placeholder="enter a product name" placeholderTextColor="white" style={{color:'white'}} />
+                  <Input placeholder="enter a product name" placeholderTextColor="white" style={{ color: "white" }} />
                 </Item>
               </View>
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
-                  <Octicons name="sync" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
+                  <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
                       this.setState({
                         whichCamera:
                           this.state.whichCamera ===
