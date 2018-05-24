@@ -146,15 +146,7 @@ export default class CameraComponent extends React.Component {
               </View>
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
-                  <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => {
-                      this.setState({
-                        whichCamera:
-                          this.state.whichCamera ===
-                          Camera.Constants.Type.back
-                            ? Camera.Constants.Type.front
-                            : Camera.Constants.Type.back
-                      })
-                    }} />
+                  <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => this._flipCamera()} />
                 </Item>
               </View>
             </Header>
@@ -195,7 +187,14 @@ export default class CameraComponent extends React.Component {
   }
 
   // UX functions
-
+  _flipCamera = () => {
+    this.setState({
+      whichCamera:
+        this.state.whichCamera === Camera.Constants.Type.back
+          ? Camera.Constants.Type.front
+          : Camera.Constants.Type.back
+    });
+  }
 
 }
 
