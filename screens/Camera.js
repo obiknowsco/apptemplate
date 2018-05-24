@@ -1,16 +1,15 @@
 import React from "react";
 import { 
-  FileSystem, 
   View, Text, StyleSheet,
   LayoutAnimation,
   Alert, Image,
   Linking,
   Dimensions,
-  StatusBar,
+  StatusBar, Vibration,
   TouchableOpacity,
 } from "react-native";
 
-import { SQLite, Camera, BarCodeScanner, Permissions } from 'expo';
+import { FileSystem, Camera, BarCodeScanner, Permissions } from "expo";
 
 import { Container, Content, Header, Item, Input, Button } from "native-base";
 import { Octicons } from "@expo/vector-icons";
@@ -72,42 +71,57 @@ export default class CameraComponent extends React.Component {
   takePicture = async function() {
     if (this.camera) {
       this.camera.takePictureAsync().then(data => {
-          console.log('took a pic');
-        FileSystem.moveAsync({ 
-          from: data.uri, 
-          to: `${FileSystem.cacheDirectory}/facts-photos/${this.state.photoId}.jpg`
-        }).then(() => {
-          this.setState({ photosTaken: this.state.photoId + 1 });
+        
+        console.log('taking picture');
+        console.log(`pic is saved at: ${data.uri}`)
+
+        // Update photo count, use this to monetize == guala biil$$$
+        this.setState({ photosTaken: this.state.photosTaken + 1 });
+
+        FileSystem.getInfoAsync( data.uri, { 
+          size: true, 
+        }).then((result) => {
+          console.log(`Result: ${result}`);
+          
           Vibration.vibrate();
-        }).then(() => {
 
         }).then(() => {
-          console.log('something else');
+
+          console.log('.loading');
+
+        }).then(() => {
+
+          console.log('..loading');
           
         }).then(() => {
-          console.log('thensomething else');
-        }).then(() => {
-          console.log('...and something else');
+
+          console.log(`...loading. Pic is still at: ${data.uri}`);
+
+          // replace this with a modal 
           Alert.alert(
-            "Alert Title",
-            "My Alert Msg",
+            "Camera Alert Title",
+            "We gon replace this w/ a sexy ass custom modal",
             [
               {
-                text: "Ask me later",
-                onPress: () => console.log("Ask me later pressed")
+                text: "Save",
+                onPress: () => console.log("Save for later pressed")
               },
+              { text: "Edit", onPress: () => this.refs.cameraModal.open() },
               {
                 text: "Cancel",
                 onPress: () => console.log("Cancel Pressed"),
                 style: "cancel"
               },
-              { text: "OK", onPress: () => console.log("OK Pressed") }
             ],
             { cancelable: false }
           );
 
-        })
-        ;
+        }).catch((error) => {
+
+          console.log('There was an error taking a picture');
+          console.log(`The Error: ${error}`);
+          
+        });
       });
     }
   };
@@ -129,7 +143,7 @@ export default class CameraComponent extends React.Component {
     } else {
       // we got the OK! -> return the Camera
       return <View style={{ flex: 1, backgroundColor: "transparent" }}>
-          <Camera onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
+          <Camera ref={(cam) => {this.camera = cam}} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
             {/* Header */}
             <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
