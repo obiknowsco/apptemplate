@@ -33,9 +33,6 @@ export default class CameraComponent extends React.Component {
       whichCamera: Camera.Constants.Type.back,
       photosTaken: 0,
       lastScannedUrl: null,
-      swipeToClose: true,
-      isModalOpen: false,
-      isCameraModalOpen: false,
       barCodeScanned: {
         type: null,
         data: null,
@@ -87,20 +84,6 @@ export default class CameraComponent extends React.Component {
     }
   };
 
-  _toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-  }
-
-  _toggleBarCodeModal = (result) => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-
-    
-  }
-  _toggleCameraModal = () => {
-    this.setState({ isCameraModalVisible: !this.state.isCameraModalVisible });
-  }
-
-  
 
   render() {
 
@@ -110,11 +93,13 @@ export default class CameraComponent extends React.Component {
     const {barCodeScanned} = this.state
 
     if (hasCameraPermissions === null) {
+      // if permissions no , show this 
       return ( <View> </View> )
     } else if(hasCameraPermissions === false) {
+      // user didnt grant app permissions
       return ( <Text> No access to Camera</Text> )
     } else {
-      // return the Camera
+      // we got the OK! -> return the Camera
       return <View style={{ flex: 1, backgroundColor: "transparent" }}>
           <Camera onBarCodeRead={this.handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
             {/* Header */}
