@@ -115,7 +115,7 @@ export default class CameraComponent extends React.Component {
       return ( <Text> No access to Camera</Text> )
     } else {
       // return the Camera
-      return <View style={{ flex: 1 }}>
+      return <View style={{ flex: 1, backgroundColor:'transparent' }}>
           <Camera onBarCodeRead={this.handleBarCodeRead} style={{ height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "transparent", justifyContent: "space-between" }}>
             {/* Header */}
             <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
@@ -124,10 +124,10 @@ export default class CameraComponent extends React.Component {
                   <Octicons name="beaker" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} />
                 </Item>
               </View>
-              <View style={{ flexDirection: "row", flex: 6 }}>
-                <Item style={{ justifyContent: "space-around" }}>
-                  <Octicons name="search" style={{ color: "white", fontSize: 24, fontWeight: "bold", padding: 5 }} />
-                  <Input placeholder="enter a product name" placeholderTextColor="black" />
+              <View style={{ flexDirection: "row", flex: 6,  }}>
+                <Item style={{ justifyContent: "space-around", backgroundColor: "#708090" }}>
+                  <Octicons name="search" style={{ color: "white", fontSize: 18, padding: 8, fontWeight: "bold" }} />
+                  <Input placeholder="enter a product name" placeholderTextColor="white" style={{color:'white'}} />
                 </Item>
               </View>
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
@@ -164,9 +164,6 @@ export default class CameraComponent extends React.Component {
                 </Text>
               </Modal>
             </View>
-
-            
-
 
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
               <Octicons name="book" style={{ color: "white", fontSize: 28 }} />
