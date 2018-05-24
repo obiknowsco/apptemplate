@@ -10,9 +10,6 @@ import {
   Thumbnail,
   Button,
   Body,
-  Left,
-  Right,
-  Icon,
   Text,
   Tab,
   Tabs,
@@ -22,7 +19,7 @@ import {
 // Tab Screens
 import Tab1 from './_factrecords/Tab1'  // Scan Stats Tab
 import Tab2 from './_factrecords/Tab2'  // Past Scans Tab 
-import Tab3 from './_factrecords/Tab3'  // free.. for now
+// import Tab3 from './_factrecords/Tab3'  // free.. for now
 
 // Icons
 import { Octicons } from "@expo/vector-icons";
@@ -53,11 +50,11 @@ export default class FactRecords extends Component {
             <Tab2 />
           </Tab>
 
-          <Tab heading={<ScrollableTab>
-                <Icon name="apps" />
+          {/* <Tab heading={<ScrollableTab>
+                <Octicons name="screen-normal" />
               </ScrollableTab>}>
             <Tab3 />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </Container>;
   }
