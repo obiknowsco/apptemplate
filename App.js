@@ -5,8 +5,8 @@ import { Container, Content } from "native-base";
 import  Swiper  from "react-native-swiper";
 
 // components
-import Camera from './components/Camera'
-import FactRecords from './components/FactRecords'
+import Camera from './screens/Camera'
+import FactRecords from './screens/FactRecords'
 
 const styles = StyleSheet.create({
   slideDefault: {
