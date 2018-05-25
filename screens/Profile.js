@@ -10,7 +10,7 @@ export default class Profile extends Component {
       <Container>
         <Header>
           <Body>
-            <Title style={{}}>My Facts</Title>
+            <Title style={{}}>My Facts Profile</Title>
           </Body>
         </Header>
 

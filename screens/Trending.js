@@ -11,7 +11,7 @@ export default class TrendingAndRecent extends Component {
 
         <Header >
           <Body>
-            <Title style={{}}>Trending</Title>
+            <Title style={{}}>Trending & Recent</Title>
           </Body>
         </Header>
 
