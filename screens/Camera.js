@@ -32,6 +32,7 @@ export default class CameraComponent extends React.Component {
       whichCamera: Camera.Constants.Type.back,
       photosTaken: 0,
       lastScannedUrl: null,
+      lastTakenPhoto: null,
       barCodeScanned: {
         type: null,
         data: null,
@@ -70,12 +71,14 @@ export default class CameraComponent extends React.Component {
 
   takePicture = async function() {
     if (this.camera) {
+      // take the photo and trigger the 
       this.camera.takePictureAsync().then(data => {
         
         console.log('taking picture');
         console.log(`pic is saved at: ${data.uri}`)
 
-        // Update photo count, use this to monetize == guala biil$$$
+        // Update photo, photo count, use this to monetize == guala biil$$$
+        this.setState({ lastTakenPhoto: data.uri });
         this.setState({ photosTaken: this.state.photosTaken + 1 });
 
         FileSystem.getInfoAsync( data.uri, { 
@@ -173,7 +176,7 @@ export default class CameraComponent extends React.Component {
             {/* Camera/Edit Modal */}
             <View>
               <Modal ref={"cameraModal"} position={"bottom"} swipeToClose={true} coverScreen={true} backdropPressToClose={true} style={[styles.modal, styles.cameraModal]}>
-                <CameraModalContent />
+                <CameraModalContent image={this.state.lastTakenPhoto}/>
               </Modal>
             </View>
 
@@ -235,11 +238,11 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: "center",
     alignItems: "center",
-    height: 350
+    height: 420,
   },
   modalText: {
     fontSize: 24
   },
+  cameraModal: {},
   barcodeModal: {},
-  cameraModal: {}
 });

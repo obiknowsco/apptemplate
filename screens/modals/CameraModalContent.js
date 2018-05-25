@@ -1,21 +1,21 @@
 import React from "react";
 import {
-  // FileSystem,
-  View,
-  Text,
-  StyleSheet,
-  // Image,
+  View, StyleSheet,
+  Image, TouchableOpacity,
+  Alert, 
   // Linking,
   // Dimensions,
 } from "react-native";
 
+// Easy Grid UI Lib
+import { Col, Row, Grid } from "react-native-easy-grid";
 
-// import { Container, Content, Header, Item, Input, Button } from "native-base";
+// For Prop Type Checking
+import PropTypes from "prop-types";
+
+import { Button, Text } from "native-base";
 // import { Octicons } from "@expo/vector-icons";
 
-// UI Components
-// import Modal from "react-native-modal";
-// import Modal from "react-native-modalbox";
 
 
 export default class CameraModalContent extends React.Component {
@@ -24,34 +24,64 @@ export default class CameraModalContent extends React.Component {
     super();
     // this.state = {
     //   hasCameraPermissions: null,
-    //   whichCamera: Camera.Constants.Type.back,
     //   photosTaken: 0,
     //   lastScannedUrl: null,
-    //   barCodeScanned: {
-    //     type: null,
-    //     data: null
-    //   }
     // };
   }
 
 
   render() {
+    const img = this.props.image;
 
-    return (// Camera/Crop OCR Reading Modal Content
-      <View style={{ flex: 1, backgroundColor: "red" }}>
+    // Camera/Crop OCR Reading Modal Content
+    return <View style={{ flex: 1 }}>
         {/* Modal Header */}
 
-        <View style={{}}>
-          <Text style={styles.modalText}>
-            I am the Camera Modal Content
-          </Text>
+        <View style={{ margin: 5 }}>
+          <Text style={styles.modalText}>I am the Camera Modal Title</Text>
         </View>
-      </View>
-    )
+
+        <TouchableOpacity style={{ marginBottom: 10 }} onPress={this._onPhotoTouch}>
+          <Image style={{ height: 250 }} source={{ uri: img }} />
+        </TouchableOpacity>
+
+        {/* Buttons */}
+        <Button block danger onPress={this._onPhotoTouch} style={{ marginBottom: 5 }}>
+          <Text>Crop</Text>
+        </Button>
+        <Button block success style={{ marginBottom: 5 }}>
+          <Text>Send</Text>
+        </Button>
+      </View>;
   }
  
+  _onPhotoTouch = () => {
+    Alert.alert(
+      "Crop/Edit Params",
+      "We gon replace this w/ a crop edit screen",
+      [
+        {
+          text: "Save",
+          onPress: () => console.log("Save for later pressed")
+        },
+        { text: "Edit", onPress: () => this.refs.cameraModal.open() },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        }
+      ],
+      { cancelable: false }
+    );
+  }
 }
 
+//
+CameraModalContent.propTypes = {
+  image: PropTypes.string,
+};
+
+// Styles and UI
 const styles = StyleSheet.create({
   container: {
     flex: 1,
