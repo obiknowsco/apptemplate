@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Container, Content } from "native-base";
 import  Swiper  from "react-native-swiper";
 
-// components
+// screens
 import Camera from './screens/Camera'
 import FactRecords from './screens/FactRecords'
 import Trending from './screens/Trending'
@@ -46,7 +46,8 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <Container>
+    return (
+      <Container>
         <Content>
           <Swiper loop={false} showsPagination={false} index={1}>
             <View style={{ flex: 1 }}>
@@ -55,7 +56,7 @@ export default class App extends React.Component {
 
             <Swiper loop={false} horizontal={false} showsPagination={false} index={1} onIndexChanged={index => this.verticalScroll(index)}>
               <View style={{ flex: 1 }}>
-                <Profile/>
+                <Profile />
                 {/* <Text style={styles.text}>Profile & Settings</Text> */}
               </View>
 
@@ -74,7 +75,7 @@ export default class App extends React.Component {
             </View>
           </Swiper>
         </Content>
-      </Container>;
+      </Container>)
   }
 }
 

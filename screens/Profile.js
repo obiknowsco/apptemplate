@@ -6,20 +6,21 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 export default class Profile extends Component {
   render() {
-    return (
-      <Container>
+    return <Container>
         <Header>
           <Body>
-            <Title style={{}}>My Facts Profile</Title>
+            <Title >
+              My Facts Profile
+            </Title>
           </Body>
         </Header>
 
         <Grid>
-          <Row style={{ backgroundColor: "#635DB7" }} size={2} />
+          <Row style={{ backgroundColor: "green" }} size={2} />
+          <Row style={{ backgroundColor: "#635DB7" }} size={1} />
           <Row style={{ backgroundColor: "#00CE9F" }} size={1} />
           <Row style={{ backgroundColor: "red" }} size={1} />
         </Grid>
-      </Container>
-    );
+      </Container>;
   }
 }

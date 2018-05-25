@@ -87,14 +87,6 @@ export default class CameraComponent extends React.Component {
 
         }).then(() => {
 
-          console.log('.loading');
-
-        }).then(() => {
-
-          console.log('..loading');
-          
-        }).then(() => {
-
           console.log(`...loading. Pic is still at: ${data.uri}`);
 
           // replace this with a modal 
@@ -117,7 +109,7 @@ export default class CameraComponent extends React.Component {
           );
 
         }).catch((error) => {
-
+          // something happened
           console.log('There was an error taking a picture');
           console.log(`The Error: ${error}`);
           
@@ -146,18 +138,20 @@ export default class CameraComponent extends React.Component {
           <Camera ref={(cam) => {this.camera = cam}} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
             {/* Header */}
             <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
+              {/* Facts Bar Code Icon */}
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent" }}>
                   <Image source={require("../assets/barcode-icon.png")} fadeDuration={0} style={{ width: 28, height: 28 }} />
-                  {/* <Octicons name="beaker" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} /> */}
                 </Item>
               </View>
+              {/* Search Bar */}
               <View style={{ flexDirection: "row", flex: 6 }}>
                 <Item style={{ justifyContent: "space-around", backgroundColor: "#708090" }}>
                   <Octicons name="search" style={{ color: "white", fontSize: 18, padding: 8, fontWeight: "bold" }} />
                   <Input placeholder="enter a product name" placeholderTextColor="white" style={{ color: "white" }} />
                 </Item>
               </View>
+              {/* Flip Camera Button */}
               <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
                   <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => this._flipCamera()} />
@@ -185,13 +179,16 @@ export default class CameraComponent extends React.Component {
 
             {/* Bottom Bar Icons */}
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10, marginBottom: 15, alignItems: "flex-end" }}>
+              {/* Bottom Left Button */}
               <Octicons name="book" style={{ color: "white", fontSize: 28 }} />
+              {/* Center Take Picture Button */}
               <View style={{ alignItems: "center" }}>
                 <Octicons name="screen-full" style={{ color: "white", fontSize: 88 }} onPress={() => {
                     // this.refs.cameraModal.open();
                     this.takePicture();
                   }} />
               </View>
+              {/* Bottom Right Button */}
               <Octicons name="broadcast" style={{ color: "white", fontSize: 28 }} />
             </View>
           </Camera>
