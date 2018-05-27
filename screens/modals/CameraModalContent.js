@@ -1,7 +1,7 @@
 import React from "react";
 import {
   View, StyleSheet,
-  Image, TouchableOpacity,
+  ImageBackground, TouchableOpacity,
   Alert, 
   // Linking,
   // Dimensions,
@@ -36,21 +36,23 @@ export default class CameraModalContent extends React.Component {
     // Camera/Crop OCR Reading Modal Content
     return <View style={{ flex: 1 }}>
         {/* Modal Header */}
-
         <View style={{ margin: 5 }}>
           <Text style={styles.modalText}>I am the Camera Modal Title</Text>
         </View>
 
+        {/*  */}
         <TouchableOpacity style={{ marginBottom: 10 }} onPress={this._onPhotoTouch}>
-          <Image style={{ height: 250 }} source={{ uri: img }} />
+          <ImageBackground style={{ height: 250 }} source={{ uri: img }}>
+            <Text style={{ color:'white', alignItems: 'center', justifyContent:'center' }}>Tap twice to crop </Text>
+          </ImageBackground>
         </TouchableOpacity>
 
-        {/* Buttons */}
+        {/* Control Buttons */}
         <Button block danger onPress={this._onPhotoTouch} style={{ marginBottom: 5 }}>
           <Text>Crop</Text>
         </Button>
         <Button block success style={{ marginBottom: 5 }}>
-          <Text>Send</Text>
+          <Text>Search</Text>
         </Button>
       </View>;
   }
