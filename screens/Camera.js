@@ -92,24 +92,28 @@ export default class CameraComponent extends React.Component {
 
           console.log(`...loading. Pic is still at: ${data.uri}`);
 
+          // then open the camera modal
+          this.refs.cameraModal.open();
+
+
           // replace this with a modal 
-          Alert.alert(
-            "Camera Alert Title",
-            "We gon replace this w/ a sexy ass custom modal",
-            [
-              {
-                text: "Save",
-                onPress: () => console.log("Save for later pressed")
-              },
-              { text: "Edit", onPress: () => this.refs.cameraModal.open() },
-              {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel"
-              },
-            ],
-            { cancelable: false }
-          );
+          // Alert.alert(
+          //   "Camera Alert Title",
+          //   "We gon replace this w/ a sexy ass custom modal",
+          //   [
+          //     {
+          //       text: "Save",
+          //       onPress: () => console.log("Save for later pressed")
+          //     },
+          //     { text: "Edit", onPress: () => this.refs.cameraModal.open() },
+          //     {
+          //       text: "Cancel",
+          //       onPress: () => console.log("Cancel Pressed"),
+          //       style: "cancel"
+          //     },
+          //   ],
+          //   { cancelable: false }
+          // );
 
         }).catch((error) => {
           // something happened
@@ -144,9 +148,8 @@ export default class CameraComponent extends React.Component {
             {/* Header */}
             <Header>
               <Left />
-              <Body style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center' }}>
-                <Image source={require("../assets/barcode-icon.png")} fadeDuration={0} style={{ width: 28, height: 28 }} />
-                <Title style={{ marginLeft: 5 }}>factz</Title>
+              <Body style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{height:20,width:100}} resizeMethod="resize" />
               </Body>
               <Right />
             </Header>

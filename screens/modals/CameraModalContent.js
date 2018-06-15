@@ -43,16 +43,19 @@ export default class CameraModalContent extends React.Component {
         {/*  */}
         <TouchableOpacity style={{ marginBottom: 10 }} onPress={this._onPhotoTouch}>
           <ImageBackground style={{ height: 250 }} source={{ uri: img }}>
-            <Text style={{ color:'white', alignItems: 'center', justifyContent:'center' }}>Tap twice to crop </Text>
+            <Text style={{ flex:1, color:'white', alignItems: 'center', justifyContent:'center' }}>Tap twice to crop </Text>
           </ImageBackground>
         </TouchableOpacity>
 
         {/* Control Buttons */}
-        <Button block danger onPress={this._onPhotoTouch} style={{ marginBottom: 5 }}>
+        {/* <Button block danger onPress={this._onPhotoTouch} style={{ marginBottom: 5 }}>
           <Text>Crop</Text>
-        </Button>
+        </Button> */}
         <Button block success style={{ marginBottom: 5 }}>
           <Text>Search</Text>
+        </Button>
+        <Button block danger style={{ marginBottom: 5 }}>
+          <Text>Retake</Text>
         </Button>
       </View>;
   }
