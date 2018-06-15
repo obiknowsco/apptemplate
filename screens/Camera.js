@@ -11,7 +11,7 @@ import {
 
 import { FileSystem, Camera, BarCodeScanner, Permissions } from "expo";
 
-import { Container, Content, Header, Item, Input, Button } from "native-base";
+import { Container, Content, Header, Left, Right, Body, Title, Item, Input, Button } from "native-base";
 import { Octicons } from "@expo/vector-icons";
 
 // UI Components
@@ -138,29 +138,41 @@ export default class CameraComponent extends React.Component {
     } else {
       // we got the OK! -> return the Camera
       return <View style={{ flex: 1, backgroundColor: "transparent" }}>
-          <Camera ref={(cam) => {this.camera = cam}} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
+          <Camera ref={cam => {
+              this.camera = cam;
+            }} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
             {/* Header */}
-            <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}>
-              {/* Facts Bar Code Icon */}
-              <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
+            <Header>
+              <Left />
+              <Body style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center' }}>
+                <Image source={require("../assets/barcode-icon.png")} fadeDuration={0} style={{ width: 28, height: 28 }} />
+                <Title style={{ marginLeft: 5 }}>factz</Title>
+              </Body>
+              <Right />
+            </Header>
+
+            {/* Alt. Header */}
+            {/* <Header noShadow searchBar rounded style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, zIndex: 100 }}> */}
+            {/* Facts Bar Code Icon */}
+            {/* <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent" }}>
                   <Image source={require("../assets/barcode-icon.png")} fadeDuration={0} style={{ width: 28, height: 28 }} />
                 </Item>
-              </View>
-              {/* Search Bar */}
-              <View style={{ flexDirection: "row", flex: 6 }}>
+              </View> */}
+            {/* Search Bar */}
+            {/* <View style={{ flexDirection: "row", flex: 6 }}>
                 <Item style={{ justifyContent: "space-around", backgroundColor: "#708090" }}>
                   <Octicons name="search" style={{ color: "white", fontSize: 18, padding: 8, fontWeight: "bold" }} />
                   <Input placeholder="enter a product name" placeholderTextColor="white" style={{ color: "white" }} />
                 </Item>
-              </View>
-              {/* Flip Camera Button */}
-              <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
+              </View> */}
+            {/* Flip Camera Button */}
+            {/* <View style={{ flexDirection: "row", flex: 1, justifyContent: "space-around" }}>
                 <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
                   <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => this._flipCamera()} />
                 </Item>
-              </View>
-            </Header>
+              </View> */}
+            {/* </Header> */}
 
             {/* Bar Code Scanning Modal */}
             <View>
@@ -176,7 +188,7 @@ export default class CameraComponent extends React.Component {
             {/* Camera/Edit Modal */}
             <View>
               <Modal ref={"cameraModal"} position={"bottom"} swipeToClose={true} coverScreen={true} backdropPressToClose={true} style={[styles.modal, styles.cameraModal]}>
-                <CameraModalContent image={this.state.lastTakenPhoto}/>
+                <CameraModalContent image={this.state.lastTakenPhoto} />
               </Modal>
             </View>
 
