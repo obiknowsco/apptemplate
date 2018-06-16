@@ -20,6 +20,7 @@ import Modal from "react-native-modalbox";
 
 // Modals
 import CameraModalContent from "./modals/CameraModalContent";
+import BarcodeModalContent from "./modals/BarcodeModalContent";
 
 
 export default class CameraComponent extends React.Component {
@@ -69,6 +70,62 @@ export default class CameraComponent extends React.Component {
     }
   };
 
+  scanBarCode = async function() {
+    if (this.camera) {
+      // take the photo and trigger the 
+      this.camera.takePictureAsync().then(data => {
+        
+        console.log('taking picture');
+        console.log(`pic is saved at: ${data.uri}`)
+
+        // Update photo, photo count, use this to monetize == guala biil$$$
+        this.setState({ lastTakenPhoto: data.uri });
+        this.setState({ photosTaken: this.state.photosTaken + 1 });
+
+        FileSystem.getInfoAsync( data.uri, { 
+          size: true, 
+        }).then((result) => {
+          console.log(`Result: ${result}`);
+          
+          Vibration.vibrate();
+
+        }).then(() => {
+
+          console.log(`...loading. Pic is still at: ${data.uri}`);
+
+          // then open the camera modal
+          this.refs.cameraModal.open();
+
+
+          // replace this with a modal 
+          // Alert.alert(
+          //   "Camera Alert Title",
+          //   "We gon replace this w/ a sexy ass custom modal",
+          //   [
+          //     {
+          //       text: "Save",
+          //       onPress: () => console.log("Save for later pressed")
+          //     },
+          //     { text: "Edit", onPress: () => this.refs.cameraModal.open() },
+          //     {
+          //       text: "Cancel",
+          //       onPress: () => console.log("Cancel Pressed"),
+          //       style: "cancel"
+          //     },
+          //   ],
+          //   { cancelable: false }
+          // );
+
+        }).catch((error) => {
+          // something happened
+          console.log('There was an error taking a picture');
+          console.log(`The Error: ${error}`);
+          
+        });
+      });
+    }
+  };
+  
   takePicture = async function() {
     if (this.camera) {
       // take the photo and trigger the 
@@ -149,7 +206,7 @@ export default class CameraComponent extends React.Component {
             <Header>
               <Left />
               <Body style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{height:20,width:100}} resizeMethod="resize" />
+                <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{ height: 20, width: 100 }} resizeMethod="resize" />
               </Body>
               <Right />
             </Header>
@@ -180,12 +237,15 @@ export default class CameraComponent extends React.Component {
             {/* Bar Code Scanning Modal */}
             <View>
               <Modal ref={"barcodeModal"} position={"bottom"} swipeToClose={true} coverScreen={true} backdropPressToClose={true} style={[styles.modal, styles.barcodeModal]}>
+                <BarcodeModalContent barcode={this.state.barCodeScanned.data} barcodeType={this.state.barCodeScanned.type} />
+              </Modal>
+              {/* <Modal ref={"barcodeModal"} position={"bottom"} swipeToClose={true} coverScreen={true} backdropPressToClose={true} style={[styles.modal, styles.barcodeModal]}>
                 <Text style={styles.modalText}>
                   I am the Bar Code Modal
                   <Text>Type: {barCodeScanned.type}</Text>
                   <Text>UPC: {barCodeScanned.data}</Text>
                 </Text>
-              </Modal>
+              </Modal> */}
             </View>
 
             {/* Camera/Edit Modal */}
