@@ -203,10 +203,10 @@ export default class CameraComponent extends React.Component {
               this.camera = cam;
             }} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
             {/* Header */}
-            <Header>
+            <Header style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, borderBottomWidth: 0 }}>
               <Left />
               <Body style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{ height: 20, width: 100 }} resizeMethod="resize" />
+                <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{ height: 30, width: 110, backgroundColor: "white", padding: 10, borderRadius: 5 }} resizeMethod="resize" />
               </Body>
               <Right />
             </Header>
