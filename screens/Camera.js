@@ -204,11 +204,20 @@ export default class CameraComponent extends React.Component {
             }} onBarCodeRead={this.handleBarCodeRead} style={styles.cameraView} type={whichCamera}>
             {/* Header */}
             <Header style={{ position: "absolute", justifyContent: "center", alignItems: "center", backgroundColor: "transparent", left: 0, top: 0, right: 0, borderBottomWidth: 0 }}>
-              <Left />
+              <Left>
+                <Item style={{ justifyContent: "space-around" }}>
+                  <Octicons name="search" style={{ color: "white", fontSize: 18, padding: 8, fontWeight: "bold", borderBottomWidth: 0 }} />
+                  {/* <Input placeholder="enter a product name" placeholderTextColor="white" style={{ color: "white" }} /> */}
+                </Item>
+              </Left>
               <Body style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                 <Image source={require("../assets/facts-logotype.png")} fadeDuration={0} style={{ height: 30, width: 110, backgroundColor: "white", padding: 10, borderRadius: 5 }} resizeMethod="resize" />
               </Body>
-              <Right />
+              <Right>
+                <Item style={{ backgroundColor: "transparent", justifyContent: "space-around" }}>
+                  <Octicons name="device-camera" style={{ color: "white", fontSize: 24, fontWeight: "bold" }} onPress={() => this._flipCamera()} />
+                </Item>
+              </Right>
             </Header>
 
             {/* Alt. Header */}
