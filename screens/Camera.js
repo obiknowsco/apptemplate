@@ -53,6 +53,7 @@ export default class CameraComponent extends React.Component {
   
   // filesystem funcs
   handleBarCodeRead = result => {
+    // on barcode read, check if this is the same barcode as before 
     if (result.data !== this.state.lastScannedUrl) {
       
       // Set Barcode Data
@@ -64,6 +65,7 @@ export default class CameraComponent extends React.Component {
       // Open the Bar Code Modal
       this.refs.barcodeModal.open();
 
+      // save the data 
 
       // LayoutAnimation.spring();
       this.setState({ lastScannedUrl: result.data });

@@ -24,6 +24,8 @@ export default class BarcodeModalContent extends React.Component {
   constructor() {
     super();
 
+    
+
     // this.state = {
     //   hasCameraPermissions: null,
     //   photosTaken: 0,
@@ -37,6 +39,10 @@ export default class BarcodeModalContent extends React.Component {
     // on props Update, check the barcodeType & barcode
     console.log(typeof this.props.barcodeType);
     console.log(this.props.barcodeType);
+
+    // fetch from the global store and log it (TEST)
+    // global.storage.load({key:'test'})
+    // .then(res => {console.log(res);})
   }
 
 
