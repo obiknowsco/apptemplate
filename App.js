@@ -52,22 +52,11 @@ export default class App extends React.Component {
       console.log(this.state);
     }
   }
-  horizontalScroll = (index) => {
-    if(index == 0){
-      // then we're at top, set outerScroll to false
-      console.log('H. Index: ', index);
-      console.log(this.state);
-      
-    } else {
-      console.log('H. Index: ', index);
-      console.log(this.state);
-    }
-  }
 
   render() {
     return <Container>
         <Content>
-          <Swiper scrollEnabled={this.state.outerScrollEnabled} loop={false} showsPagination={false} index={1} onIndexChanged={index => this.horizontalScroll(index)}>
+          <Swiper scrollEnabled={this.state.outerScrollEnabled} loop={false} showsPagination={false} index={1}>
             {/* Left Swipe to Profile/Stats  */}
             <View style={{ flex: 1 }}>
               <FactRecords />
