@@ -97,7 +97,7 @@ export default class App extends React.Component {
               </View>
             </Swiper>
 
-            {/* Right Swipe to Social/Explore/Trending */}
+            {/* Right Swipe to Social/Explore/Trending */} 
             <View style={{ flex: 1 }}>
               <Trending />
             </View>
